@@ -25866,7 +25866,7 @@ GameObject:
   - component: {fileID: 1989500070}
   - component: {fileID: 1989500071}
   m_Layer: 2
-  m_Name: gayrobot
+  m_Name: robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25907,11 +25907,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d552b353fadb748a80b2c6878d7f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Controller: {fileID: 0}
+  Input: {fileID: 0}
   RightArmPlant: {fileID: 693546545}
   LeftArmPlant: {fileID: 1484211732}
   RightLegPlant: {fileID: 619992584}
   LeftLegPlant: {fileID: 716934453}
-  step: 0
 --- !u!1 &1990514907
 GameObject:
   m_ObjectHideFlags: 0
