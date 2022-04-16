@@ -101,31 +101,17 @@ public class FootCollab : MonoBehaviour
         } else {
             ChangeUpdatePriority(FootUpdatingPriority.Manual);
 
-            RightArmPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
-            RightLegPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
-
-            LeftArmPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
-            LeftLegPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
-
             if (MoveFootPlantingUpdate == null || MoveFootPlantingUpdate.Destroyed) {
                 StillFootPlantingUpdate?.Destroy();
-                RightArmPlant.RayCastUpdate();
-                RightLegPlant.RayCastUpdate();
-                MoveFootPlantingUpdate = Runservice.RunEvery(0, (RightArmPlant.RaycastFrameUpdateInterval / 50F),
-                (float dt) =>
-                    { 
-                        if ((RightArmPlant.transform.position - RightArmPlant.TrackingObject.position).magnitude > RightArmPlant.RayLength) {
-                            LeftArmPlant.RayCastUpdate();
-                            LeftLegPlant.RayCastUpdate();
-                        }
-                        if ((LeftArmPlant.transform.position - LeftArmPlant.TrackingObject.position).magnitude > LeftArmPlant.RayLength) {
-                            RightArmPlant.RayCastUpdate();
-                            RightLegPlant.RayCastUpdate();
-                        }
-                        return true;
-                    }
-                );
-            }
+
+                RightArmPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
+                RightLegPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
+
+                LeftArmPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
+                LeftLegPlant.ConeDirection = (new Vector3(0, -1, 1)).normalized;
+
+				ChangeUpdatePriority(FootUpdatingPriority.OnlyWhenUnreachable);
+			}
         }
     }
 }

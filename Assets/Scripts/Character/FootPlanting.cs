@@ -6,7 +6,7 @@ public enum FootPlantingPriority {
     Closest, Farthest
 }
 public enum FootUpdatingPriority {
-    Always, OnlyWhenUnreachable
+    Always, OnlyWhenUnreachable, Manual
 }
 
 public class FootPlanting : MonoBehaviour
@@ -24,7 +24,7 @@ public class FootPlanting : MonoBehaviour
 
     public int RaycastFrameUpdateInterval = 2;
     public bool InterpolatePosition = true;
-    public FootPlantingPriority Priority = FootPlantingPriority.Closest;
+    public FootPlantingPriority PlantingPriority = FootPlantingPriority.Closest;
     public FootUpdatingPriority UpdatePriority = FootUpdatingPriority.Always;
 
 
@@ -41,13 +41,14 @@ public class FootPlanting : MonoBehaviour
             Runservice.RunEvery(0, (RaycastFrameUpdateInterval / 50F),
                 (float dt) =>
                 {
-                    if (UpdatePriority == FootUpdatingPriority.OnlyWhenUnreachable) {
-                        if ((transform.position - TrackingObject.position).magnitude < RayLength) {
-                            return true;
+                    if (UpdatePriority != FootUpdatingPriority.Manual) {
+                        if (UpdatePriority == FootUpdatingPriority.OnlyWhenUnreachable) {
+                            if ((transform.position - TrackingObject.position).magnitude < RayLength) {
+                                return true;
+                            }
                         }
-                    }
                     RayCastUpdate();
-                    
+                    }
                     return true;
                 }
             )
@@ -100,12 +101,12 @@ public class FootPlanting : MonoBehaviour
             {
                 RaycastHit hit = bestFootPlacements[i];
 
-                if (Priority == FootPlantingPriority.Closest) {
+                if (PlantingPriority == FootPlantingPriority.Closest) {
                     if ((transform.position - hit.point).magnitude < (transform.position - bestPlace.point).magnitude)
                     {
                         bestPlace = hit;
                     }
-                } else if (Priority == FootPlantingPriority.Farthest) {
+                } else if (PlantingPriority == FootPlantingPriority.Farthest) {
                     if ((transform.position - hit.point).magnitude > (transform.position - bestPlace.point).magnitude)
                     {
                         bestPlace = hit;
