@@ -8581,9 +8581,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1235705176037876821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04111020df6e1a7438e675f1c793c906, type: 3}
+  m_Script: {fileID: 11500000, guid: 076ac359ba9bbe641a8c7e8da1f40b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Goal: {fileID: 227506220693483823}
+  robot: {fileID: 4416926083347132227}
+  oj: {x: 0, y: 0, z: 0}
+  TimerText: {fileID: 428976004}
+  BestText: {fileID: 952904293}
 --- !u!65 &1235705176037876824
 BoxCollider:
   m_ObjectHideFlags: 0
